@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import string
 import random
+from random import sample
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///urls.db'
@@ -12,7 +14,7 @@ db = SQLAlchemy(app)
 class Urls(db.Model):
     id_ = db.Column("id_",db.Integer, primary_key=True)
     long = db.Column("long",db.String())
-    short = db.Column("short",db.String(3))
+    short = db.Column("short",db.String())
 
     def __init__(self, long, short):
         self.long = long
@@ -31,6 +33,19 @@ def shorten_url():
         if not short_url:
             return rand_letters
 
+def longen_url():
+    word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
+    response = requests.get(word_site)
+    WORDS = response.content.splitlines()
+    word_list = sample(WORDS,15)
+    joined_word_list = b'-'.join(word_list)
+    joined_word_list = joined_word_list.decode()
+    long_url = Urls.query.filter_by(short=joined_word_list).first()
+    if not long_url:
+        return joined_word_list
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -43,7 +58,7 @@ def home():
             return redirect(url_for("display_short_url", url=found_url.short))
 
         else:
-            short_url = shorten_url()
+            short_url = longen_url()
             new_url = Urls(url_recieved, short_url)
             db.session.add(new_url)
             db.session.commit()

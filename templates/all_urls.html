@@ -3,6 +3,6 @@
 
 {% block content %}
     {% for url in vals %}
-        <p><strong>Short:</strong>{{url.short}} <strong>Long:</strong> {{url.long}}</p>
+        <p><strong>Long:</strong>{{url.short}} <strong>Original:</strong> <a href={{url.long}}>{{url.long}}</a></p>
     {% endfor %}
 {% endblock %}
