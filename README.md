@@ -1,12 +1,32 @@
+# tirefi.re's shortener
 
-Stolen from: https://www.youtube.com/watch?v=YI16KWyA3M0
+No it doesn't shorten. Also we need to figure out how to deploy this.
 
+## Usage
 
-TODO:
-    - add a config file with toml, including root url and other options
-    - add a nav bar at the top of the page with bootstrap
-    - update bootstrap
-    - allow for remote database(s)
-    - add a couter to how many times the redirect happens
-    - figure out how to match both https://www.google.com and https://google.com
-    - add a curl json url endpoint and creation/redirect
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+## Author and Licence
+
+Author: JJ Asghar <awesome@ibm.com>
+
+```text
+Copyright:: 2020- IBM, Inc
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
